@@ -71,7 +71,7 @@ extension ReplacementRegex{
     static let tabunRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"(.*?)<!--.*?-->.*?<*"#, options: []), pattern: "$1$2")
     
     static let wikipediaRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"\{\{wikipedia-s\|(.*?)\}\}(.*)"#, options: []), pattern: "$1$2")
-    static let wikipediaLinkRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"\[\[Wiktionary:.*"#, options: []), pattern: "")
+    static let wikipediaLinkRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"\[*\[*Wiktionary:.*"#, options: []), pattern: "")
     static let wikiWLinkRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"(?:-* *|（参考：|「|→)w:.*"#, options: []), pattern: "")
     
 }

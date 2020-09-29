@@ -13,6 +13,7 @@ class WiktionaryImporter{
             return "Title: \(title)\nEntries:\n\(meanings.joined(separator: "\n"))"
         }
     }
+    
     var wiktionaryEntries:[String:WiktionaryEntry]=[String:WiktionaryEntry]()
     let url:URL=Bundle.module.url(forResource: "jawiktionary", withExtension: "xml")!
     
@@ -32,7 +33,7 @@ class WiktionaryImporter{
                  ReplacementRegex.tabunRegex,
                  ReplacementRegex.wikipediaLinkRegex,
                  ReplacementRegex.wikiWLinkRegex
-                 
+    
     ]
     
     public func parse(stripSemantics:Bool = true){
@@ -60,7 +61,7 @@ class WiktionaryImporter{
                 let lines=description.split(separator: "\n")
                 let definitionEntries=lines.compactMap({entry->String? in
                     if let match=headEntryRegex.firstMatch(in: String(entry), options: [], range: NSRange(entry.startIndex..<entry.endIndex, in: entry)),
-                    match.numberOfRanges > 1{
+                       match.numberOfRanges > 1{
                         return match.substring(at: 1, string: String(entry))
                     }
                     else{
