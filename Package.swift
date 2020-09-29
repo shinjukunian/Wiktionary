@@ -11,16 +11,16 @@ let package = Package(
             name: "Wiktionary",
             targets: ["Wiktionary"]),
     ],
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+    dependencies: [.package(name: "Ji", url: "https://github.com/honghaoz/Ji.git", .branch("master")),
+                   .package(name: "StringTools", url: "https://github.com/shinjukunian/StringTools.git", .branch("master"))
+                    
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "Wiktionary",
-            dependencies: []),
+        .target(name: "Wiktionary", dependencies: ["Ji", "StringTools"], path: nil, exclude: [String](), sources: nil, resources: [.copy("jawiktionary.xml")], publicHeadersPath: nil, cSettings: nil, cxxSettings: nil, swiftSettings: nil, linkerSettings: nil),
+            
+           
         .testTarget(
             name: "WiktionaryTests",
             dependencies: ["Wiktionary"]),

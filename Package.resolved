@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Ji",
+        "repositoryURL": "https://github.com/honghaoz/Ji.git",
+        "state": {
+          "branch": "master",
+          "revision": "63214b56f35f13f3a74733f5efa70ef2a803e1ca",
+          "version": null
+        }
+      },
+      {
+        "package": "StringTools",
+        "repositoryURL": "https://github.com/shinjukunian/StringTools.git",
+        "state": {
+          "branch": "master",
+          "revision": "66a24d21035a4dfcbb18d80a812ae982025ea45b",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
