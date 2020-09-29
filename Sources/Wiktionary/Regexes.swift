@@ -14,6 +14,14 @@ extension NSRegularExpression{
     }
 }
 
+extension NSTextCheckingResult{
+    func substring(at idx:Int, string:String)->String{
+        let nsrange=self.range(at: idx)
+        let range=Range<String.Index>.init(nsrange, in: string)!
+        return String(string[range])
+    }
+}
+
 struct ReplacementRegex {
     let regex:NSRegularExpression
     let pattern:String
@@ -47,9 +55,12 @@ extension ReplacementRegex{
     static let parenthesisRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"\[\[([^\]]*?)\]\]"#, options: []), pattern: "$1")
     static let exponentialRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"<sup>([0-9]+)<\/sup>"#, options: []), pattern: "E$1")
     
-    static let linkRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"<br\/>w:.*"#, options: []), pattern: "", additionalCleanUp: {s in
+    static let linkRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"<br\/>w:.*"#, options: []),
+                                          pattern: "",
+                                          additionalCleanUp: {s in
         return s.replacingOccurrences(of: "20px", with: "")
     })
+    
     static let link2Regex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"<ref.*>*(.*?)(?:<\/ref>|\/>)"#, options: []), pattern: "")
     static let link3Regex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"\[[^\]]+ ([^\]]+)\]"#, options: []), pattern: "$1")
     
@@ -57,7 +68,7 @@ extension ReplacementRegex{
     
     static let subRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"<su[pb]>(.*?)<\/su[pb]>"#, options: []), pattern: "$1")
     
-    static let tabunRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"(.*?)<!--.*?-->.*?<*<"#, options: []), pattern: "$1$2")
+    static let tabunRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"(.*?)<!--.*?-->.*?<*"#, options: []), pattern: "$1$2")
     
     static let wikipediaRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"\{\{wikipedia-s\|(.*?)\}\}(.*)"#, options: []), pattern: "$1$2")
     static let wikipediaLinkRegex=ReplacementRegex(regex: try! NSRegularExpression(pattern: #"\[\[Wiktionary:.*"#, options: []), pattern: "")
