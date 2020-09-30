@@ -15,5 +15,3 @@ let entry=parser.entry(character: "菅")
 ```
 
 You can dump all entries as human-readable text files using  ```try parser.dump(to: url, useTable: true)```.` useTable: true` exports in a tab-delimted format to inspect the dumped file in a spreadsheet program. 
-
-

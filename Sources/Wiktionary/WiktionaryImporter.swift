@@ -3,7 +3,7 @@ import Ji
 import Foundation
 import StringTools
 
-class WiktionaryImporter{
+public class WiktionaryImporter{
     
     public struct WiktionaryEntry: Equatable, Hashable, Codable, CustomStringConvertible{
         public let title:String
@@ -35,6 +35,9 @@ class WiktionaryImporter{
                  ReplacementRegex.wikiWLinkRegex
     
     ]
+    
+    
+    public init(){}
     
     public func parse(stripSemantics:Bool = true){
         guard let ji=Ji(contentsOfURL: self.url, isXML: true),
