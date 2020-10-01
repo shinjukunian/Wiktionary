@@ -22,7 +22,11 @@ extension NSTextCheckingResult{
     }
 }
 
-struct ReplacementRegex {
+protocol RegexReplacing {
+    func stringByReplacingMatches(in string:String)->String
+}
+
+struct ReplacementRegex: RegexReplacing {
     let regex:NSRegularExpression
     let pattern:String
     let additionalCleanUp:((String)->String)?

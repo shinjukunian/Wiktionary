@@ -18,7 +18,7 @@ public class WiktionaryImporter{
     let url:URL=Bundle.module.url(forResource: "jawiktionary", withExtension: "xml")!
     
     
-    let regexes=[ReplacementRegex.furiganaRegex,
+    let regexes: [RegexReplacing] = [ReplacementRegex.furiganaRegex,
                  ReplacementRegex.parenthesisRegex,
                  ReplacementRegex.exponentialRegex,
                  ReplacementRegex.linkRegex,
@@ -32,7 +32,8 @@ public class WiktionaryImporter{
                  ReplacementRegex.link3Regex,
                  ReplacementRegex.tabunRegex,
                  ReplacementRegex.wikipediaLinkRegex,
-                 ReplacementRegex.wikiWLinkRegex
+                 ReplacementRegex.wikiWLinkRegex,
+                 UnicodeReplacingRegex()
     
     ]
     
@@ -42,7 +43,7 @@ public class WiktionaryImporter{
     public func parse(stripSemantics:Bool = true){
         guard let ji=Ji(contentsOfURL: self.url, isXML: true),
               let entries=ji.rootNode?.childrenWithName("page"),
-              let regex=try? NSRegularExpression(pattern: #"\===意義===\n((?:#.+\n)+)"#, options: []),
+              let regex=try? NSRegularExpression(pattern: #"[= ]+意義[= ]+\n((?:[#『].+\n)+)"#, options: []),
               let headEntryRegex=try? NSRegularExpression(pattern: #"^#++([^*:][^a-z0-9]{0,3}.*)"#, options: [])
         else{abort()}
         
@@ -57,6 +58,10 @@ public class WiktionaryImporter{
                   contents.isEmpty == false,
                   let match=regex.firstMatch(in: contents, options: [], range: NSRange(contents.startIndex..<contents.endIndex, in: contents))
             else {continue}
+            
+            if title == "鰟"{
+                
+            }
             
         
             for idx in 1..<match.numberOfRanges{
@@ -78,6 +83,8 @@ public class WiktionaryImporter{
                     let retVal=regexes.reduce(line, {string, regex in
                         return regex.stringByReplacingMatches(in: string)
                     })
+                    
+                    
                     
                     return retVal.replacingOccurrences(of: "'''", with: "").trimmingCharacters(in: .whitespaces)
                 }).filter({entry in
