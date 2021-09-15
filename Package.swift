@@ -11,7 +11,7 @@ let package = Package(
             name: "Wiktionary",
             targets: ["Wiktionary"]),
     ],
-    dependencies: [.package(name: "Ji", url: "https://github.com/honghaoz/Ji.git", .branch("master")),
+    dependencies: [.package(name: "Ji", url: "https://github.com/shinjukunian/Ji.git", .branch("master")),
                    .package(name: "StringTools", url: "https://github.com/shinjukunian/StringTools.git", .branch("master"))
                     
     ],

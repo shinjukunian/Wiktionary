@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "Ji",
-        "repositoryURL": "https://github.com/honghaoz/Ji.git",
+        "repositoryURL": "https://github.com/shinjukunian/Ji.git",
         "state": {
           "branch": "master",
-          "revision": "63214b56f35f13f3a74733f5efa70ef2a803e1ca",
+          "revision": "c4a5120ef3df454ef0dee8363f1e98ebbfd89297",
           "version": null
         }
       },
