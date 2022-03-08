@@ -18,11 +18,12 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(name: "Wiktionary", dependencies: ["Ji", "StringTools"], path: nil, exclude: [String](), sources: nil, resources: [.copy("jawiktionary.xml")], publicHeadersPath: nil, cSettings: nil, cxxSettings: nil, swiftSettings: nil, linkerSettings: nil),
+        .target(name: "Wiktionary", dependencies: ["Ji", "StringTools"], path: nil, exclude: [String](), sources: nil, resources: [], publicHeadersPath: nil, cSettings: nil, cxxSettings: nil, swiftSettings: nil, linkerSettings: nil),
             
            
         .testTarget(
             name: "WiktionaryTests",
-            dependencies: ["Wiktionary"]),
+            dependencies: ["Wiktionary"],
+            resources: [.copy("jawiktionary.xml")]),
     ]
 )

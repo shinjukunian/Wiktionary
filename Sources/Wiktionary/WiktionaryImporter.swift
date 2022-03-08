@@ -15,7 +15,7 @@ public class WiktionaryImporter{
     }
     
     var wiktionaryEntries:[String:WiktionaryEntry]=[String:WiktionaryEntry]()
-    let url:URL=Bundle.module.url(forResource: "jawiktionary", withExtension: "xml")!
+    let url:URL
     
     
     let regexes: [RegexReplacing] = [ReplacementRegex.furiganaRegex,
@@ -38,7 +38,9 @@ public class WiktionaryImporter{
     ]
     
     
-    public init(){}
+    public init(url:URL){
+        self.url=url
+    }
     
     public func parse(stripSemantics:Bool = true){
         guard let ji=Ji(contentsOfURL: self.url, isXML: true),

@@ -3,8 +3,11 @@ import XCTest
 
 final class WiktionaryTests: XCTestCase {
     
+    let url=Bundle.module.url(forResource: "jawiktionary", withExtension: "xml")!
+    
     func testParse() {
-        let importer=WiktionaryImporter()
+        
+        let importer=WiktionaryImporter(url: url)
         importer.parse()
         ///all these are somewhat tricky and require cleanup
         XCTAssert(importer.entry(character: "手") != nil)
@@ -26,12 +29,13 @@ final class WiktionaryTests: XCTestCase {
     }
     
     func testDump() {
-        let importer=WiktionaryImporter()
+        let importer=WiktionaryImporter(url: url)
         importer.parse()
         XCTAssert(importer.entry(character: "手") != nil)
         let url=FileManager.default.temporaryDirectory.appendingPathComponent("Wiktionary_\(UUID().uuidString)").appendingPathExtension("txt")
         do{
             try importer.dump(to: url, useTable: true)
+            print("file written to \(url)")
         }
         catch let error{
             XCTFail(error.localizedDescription)
